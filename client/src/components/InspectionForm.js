@@ -64,8 +64,8 @@ const InspectionForm = ({ onInspectionAdded }) => {
 
     return (
         <div>
-            <div className="col-10 text-end text-warning my-auto mx-auto border-bottom border-subtle-dark border-solid">
-                <h1 className="text-start">Hive<span className='text-dark'>Hub</span></h1>
+            <div className="col-10 text-end text-warning my-auto mx-auto border-bottom border-dark border-solid">
+                <h1 className="text-start fw-bold">Hive<span className='text-dark'>Hub</span></h1>
             </div>
 
             <div className='text-end col-10 my-auto mx-auto mt-2'>
@@ -74,7 +74,7 @@ const InspectionForm = ({ onInspectionAdded }) => {
                 </button>
             </div>
 
-            <form onSubmit={handleAddInspection} className='form-group col-4 my-auto mx-auto mb-5'>
+            <form onSubmit={handleAddInspection} className='form-group col-5 p-5 my-auto mx-auto mb-5' id='transparent-form'>
                 <h1 className='text-warning mt-2'>New Inspection for <span className='text-dark'>{hiveData.name}</span></h1>
 
                     <div className='mb-3'>
@@ -175,7 +175,7 @@ const InspectionForm = ({ onInspectionAdded }) => {
                     <input className='btn btn-secondary ' type='submit' />
 
                     <button
-                        className='btn btn-danger border border-solid border-dark text-dark'
+                        className='btn btn-dark border border-solid border-dark text-danger p-2'
                         onClick={() => navigate(`/hives/${hiveId}`)}
                     >
                         Back

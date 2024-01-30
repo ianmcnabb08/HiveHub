@@ -75,8 +75,8 @@ const UpdateInspection = ({ onInspectionUpdated }) => {
 
     return (
         <div>
-            <div className="col-10 text-end text-warning my-auto mx-auto border-bottom border-subtle-dark border-solid">
-                <h1 className="text-start">Hive<span className='text-dark'>Hub</span></h1>
+            <div className="col-10 text-end text-warning my-auto mx-auto border-bottom border-dark border-solid">
+                <h1 className="text-start fw-bold">Hive<span className='text-dark'>Hub</span></h1>
             </div>
 
             <div className='text-end col-10 my-auto mx-auto mt-2'>
@@ -86,7 +86,7 @@ const UpdateInspection = ({ onInspectionUpdated }) => {
                 </button>
             </div>
 
-            <form onSubmit={handleEditInspection} className='form-group col-5 my-auto mx-auto'>
+            <form onSubmit={handleEditInspection} className='form-group col-5 my-auto mx-auto p-5' id='transparent-form'>
 
                 <div className='mb-3'>
                     <label className='form-label text-warning'>Brood Present?</label>

@@ -2,11 +2,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-weight: bold;
 }
 
+
+
 body{
-  background-image: url('/images/cool-background.png');
+  background-image: url('/images/GettyImages-1195014691-b37d06adf04b4f58aa7b935c6170bbe6.jpg');
   background-size: cover;
+  backdrop-filter: blur( 4px );
   background-attachment: fixed;
   font-family: 'Courier New', Courier, monospace, sans-serif;
 }
@@ -15,6 +19,12 @@ body{
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.5); 
   color: #ffffff; 
+  background: rgba(7, 1, 1, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 #transparent-form input {
@@ -22,20 +32,26 @@ body{
   border: none; 
   outline: none; 
   color: #ffffff; 
+  background: rgba(7, 1, 1, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 5px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 #hivecontainer{
-  background: rgba( 255, 255, 255, 0.25 );
+  background: rgba(7, 1, 1, 0.25);
   box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
   backdrop-filter: blur( 4px );
-  -webkit-backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 5px );
   border-radius: 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   width: 400px;
 }
 
 #inspectioncontainer{
-  background: rgba( 255, 255, 255, 0.25 );
+  background: rgba(7, 1, 1, 0.25);
   box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );
@@ -45,7 +61,7 @@ body{
 }
 
 #inspectiondetails{
-  background: rgba( 255, 255, 255, 0.25 );
+  background: rgba(7, 1, 1, 0.25);
   box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
   backdrop-filter: blur( 4px );
   -webkit-backdrop-filter: blur( 4px );

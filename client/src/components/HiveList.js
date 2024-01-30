@@ -33,9 +33,9 @@ const HiveList = (props) => {
     };
 
     return (
-        <div>
-            <div className="col-10 text-end text-warning my-auto mx-auto border-bottom border-subtle-dark border-solid">
-                <h1 className="text-start">Hive<span className='text-dark'>Hub</span></h1>
+        <div className='fw-bold'>
+            <div className="col-10 text-end text-warning my-auto mx-auto border-bottom border-dark border-solid">
+                <h1 className="text-start fw-bold">Hive<span className='text-dark'>Hub</span></h1>
             </div>
 
             <div className='text-end col-10 my-auto mx-auto mt-2'>
