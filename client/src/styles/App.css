@@ -1,0 +1,55 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-image: url('/images/cool-background.png');
+  background-size: cover;
+  background-attachment: fixed;
+  font-family: 'Courier New', Courier, monospace, sans-serif;
+}
+
+#transparent-form {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5); 
+  color: #ffffff; 
+}
+
+#transparent-form input {
+  background-color: transparent;
+  border: none; 
+  outline: none; 
+  color: #ffffff; 
+}
+
+#hivecontainer{
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  width: 400px;
+}
+
+#inspectioncontainer{
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  width: 800px;
+}
+
+#inspectiondetails{
+  background: rgba( 255, 255, 255, 0.25 );
+  box-shadow: 0 8px 32px 0 rgba(140, 140, 143, 0.37);
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 10px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+  width: 800px;
+}
