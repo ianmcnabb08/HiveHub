@@ -6,61 +6,87 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const InspectionForm = ({ onInspectionAdded }) => {
     const { id: hiveId } = useParams();
-    const [hiveData, setHiveData] = useState({});
+    const [hiveData, setHiveData] = useState({ location: '' });
     const [inspectionDate, setInspectionDate] = useState('');
     const [broodPresent, setBroodPresent] = useState('');
     const [queenPresent, setQueenPresent] = useState('');
     const [honeyStores, setHoneyStores] = useState('');
     const [notes, setNotes] = useState('');
+    const [weather, setWeather] = useState(null);
     const [notesError, setNotesError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
-    const fetchHiveData = async () => {
+        const fetchHiveData = async () => {
         try {
-        const response = await axios.get(`http://localhost:8000/api/hives/${hiveId}`);
-        setHiveData(response.data);
+            const response = await axios.get(`http://localhost:8000/api/hives/${hiveId}`);
+            setHiveData(response.data);
         } catch (error) {
-        console.error('Error fetching hive data:', error);
+            console.error('Error fetching hive data:', error);
         }
-    };
+        };
 
-    if (hiveId) {
+        if (hiveId) {
         fetchHiveData();
-    }
+        }
     }, [hiveId]);
 
-    const handleAddInspection = (e) => {
-    e.preventDefault();
+    useEffect(() => {
+        const fetchWeatherData = async () => {
+        if (!inspectionDate || !hiveData.location) return;
 
-    if (!hiveId) {
+        try {
+            // Make a request to your server to fetch weather data
+            const response = await axios.get(`http://localhost:8000/api/hives/${hiveId}/inspections/weather`, {
+            location: hiveData.location,
+            date: inspectionDate,
+            });
+
+            setWeather(response.data);
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+        };
+
+        fetchWeatherData();
+    }, [inspectionDate, hiveData.location]);
+
+    const handleAddInspection = async (e) => {
+        e.preventDefault();
+
+        if (!hiveId) {
         console.error('Invalid hiveId:', hiveId);
         return;
-    }
+        }
 
-    axios
-        .post(`http://localhost:8000/api/hives/${hiveId}/inspections`, {
-        hive: hiveId,
-        queen: queenPresent,
-        honey: honeyStores,
-        brood: broodPresent,
-        date: inspectionDate,
-        notes: notes,
-        })
-        .then((res) => {
+        try {
+        // Make a request to your server to add the inspection and fetch weather data
+        const response = await axios.post(`http://localhost:8000/api/hives/${hiveId}/inspections`, {
+            hive: hiveId,
+            queen: queenPresent,
+            honey: honeyStores,
+            brood: broodPresent,
+            date: inspectionDate,
+            notes: notes,
+            weather: weather
+        });
+
         // Notifying the parent component that a new inspection has been added
-        onInspectionAdded(res.data);
+        onInspectionAdded(response.data);
         // Clearing the form
         setInspectionDate('');
         setBroodPresent('');
         setQueenPresent('');
         setHoneyStores('');
         setNotes('');
-        })
-        .catch((err) => console.error(err));
+        setWeather('');
+        } catch (error) {
+        console.error('Error adding inspection:', error);
+        }
 
-    navigate(`/hives/${hiveId}`);
+        navigate(`/hives/${hiveId}`);
     };
+
 
     return (
         <div>
@@ -163,13 +189,15 @@ const InspectionForm = ({ onInspectionAdded }) => {
                     {notesError && <div className='invalid-feedback'>{notesError}</div>}
                     </div>
                     {/* Weather API */}
-                    {/* <div className='mb-3'>
+                    <div className='mb-3'>
                         <label className='form-label text-warning'>Weather</label>
-                        <br />
+                        {weather && (
                         <div className='col-5'>
-                        <weather component here />
+                            <p>{`Temperature: ${weather.main.temp} °C`}</p>
+                            <p>{`Description: ${weather.weather[0].description}`}</p>
                         </div>
-                    </div> */}
+                        )}
+                    </div>
 
                     <div className='mt-2 d-flex justify-content-between'>
                     <input className='btn btn-secondary ' type='submit' />

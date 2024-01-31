@@ -52,10 +52,11 @@ const HiveList = (props) => {
                     hive.map((singleHive, index) => (
                         <div className="col-md-3 m-2 my-auto mx-auto text-warning mt-4" key={index} id='hivecontainer'>
                             <div className='text-center mt-4'>
-                                <h3>{singleHive.name}</h3>
+                                <h2>{singleHive.name}</h2>
                                 <h4 className='text-dark'>Equipment Type:</h4> <h5>{singleHive.equipment}</h5>
                                 <h4 className='text-dark'>Installation Date:</h4> <h5>{formatDate(singleHive.installDate)}</h5>
-                                <h5 className='text-dark'>Notes:</h5> <h5>{singleHive.notes}</h5>
+                                <h4 className='text-dark'>Location:</h4> <h5>{singleHive.location}</h5>
+                                <h4 className='text-dark'>Notes:</h4> <h5>{singleHive.notes}</h5>
                                 <button
                                     onClick={() => navigate(`/hives/${singleHive._id}`)}
                                     className="btn btn-success border border-solid border-dark text-dark m-2"

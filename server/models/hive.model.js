@@ -6,6 +6,7 @@ const HiveSchema = new mongoose.Schema({
     equipment: { type: String },
     installDate: {type: Date},
     notes: {type: String},
+    location: {type: String},
     inspections: [{ type: mongoose.Schema.Types.ObjectId, ref:'Inspection'}],
 }, { timestamps: true });
 

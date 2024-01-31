@@ -14,6 +14,7 @@ const HiveForm = (props) => {
     const [equipment, setEquipment] = useState("");
     const [installDate, setInstallDate] = useState("");
     const [notes, setNotes] = useState("");
+    const [location, setLocation] = useState("");
     const [nameError, setNameError] = useState(null);
     const [notesError, setNotesError] = useState(null);
 
@@ -33,12 +34,13 @@ const HiveForm = (props) => {
         } else {
         setNotesError(null);
         }
-        console.log('Current State:', { name, equipment, installDate, notes });
+        console.log('Current State:', { name, equipment, installDate, notes, location });
         axios.post('http://localhost:8000/api/hives/new', {
         name,
         equipment,
         installDate,
-        notes
+        notes,
+        location
         })
         .then((res) => {
             console.log(res);
@@ -48,6 +50,7 @@ const HiveForm = (props) => {
             setEquipment("");
             setInstallDate("");
             setNotes("");
+            setLocation("");
         })
         .catch((err) => {
             console.log(err);
@@ -68,7 +71,7 @@ const HiveForm = (props) => {
             </button>
         </div>
 
-        <form onSubmit={onSubmitHandler} className='col-5 my-auto mx-auto'>
+        <form onSubmit={onSubmitHandler} className='col-5 my-auto mx-auto p-5' id='transparent-form'>
             <div className='mb-3'>
                 <label className='form-label text-warning'>Hive Name</label>
                 <br />
@@ -126,7 +129,17 @@ const HiveForm = (props) => {
             <div>
             {notesError && <div className='invalid-feedback'>{notesError}</div>}
             </div>
-
+            <div className='mb-3'>
+                <label className='form-label text-warning'>Location</label>
+                <br />
+                <input
+                    className={`form-control`}
+                    id='transparent-form'
+                    value={location}
+                    type='text'
+                    onChange={(e) => setLocation(e.target.value)}
+                />
+            </div>
             <input className='btn btn-secondary mt-2' type='submit' />
         </form>
         </div>
