@@ -33,21 +33,22 @@ const InspectionForm = ({ onInspectionAdded }) => {
 
     useEffect(() => {
         const fetchWeatherData = async () => {
-        if (!inspectionDate || !hiveData.location) return;
-
-        try {
-            // Make a request to your server to fetch weather data
-            const response = await axios.get(`http://localhost:8000/api/hives/${hiveId}/inspections/weather`, {
-            location: hiveData.location,
-            date: inspectionDate,
-            });
-
-            setWeather(response.data);
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-        }
+            if (!inspectionDate || !hiveData.location) return;
+    
+            try {
+                const response = await axios.get(`http://localhost:8000/api/hives/${hiveId}/inspections/weather`, {
+                    params: {
+                        location: hiveData.location,
+                        date: inspectionDate,
+                    },
+                });
+    
+                setWeather(response.data);
+            } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
         };
-
+    
         fetchWeatherData();
     }, [inspectionDate, hiveData.location]);
 

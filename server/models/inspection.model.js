@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const axios = require('axios');
 
 const InspectionSchema = new mongoose.Schema({
     hive: {
@@ -20,3 +19,4 @@ const InspectionSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 module.exports = mongoose.model('Inspection', InspectionSchema);
+
