@@ -1,4 +1,5 @@
 const Inspection = require('../models/inspection.model');
+const axios = require('axios');
 
 module.exports = {
     getInspectionsByHive: async (request, response) => {
@@ -16,6 +17,10 @@ module.exports = {
             const hiveId = request.params.id;
             const newInspection = { ...request.body, hive: hiveId };
             const inspection = await Inspection.create(newInspection);
+
+            // Fetch weather data and update the inspection
+            await inspection.fetchWeatherData();
+
             response.status(201).json(inspection);
         } catch (error) {
             response.status(500).json({ error: 'Internal Server Error' });
@@ -60,6 +65,40 @@ module.exports = {
                 return;
             }
             response.status(200).json(deleteConfirmation);
+        } catch (error) {
+            response.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
+    
+    fetchWeatherData: async (request, response) => {
+        try {
+            const inspectionId = request.params.id;
+            const inspection = await Inspection.findOne({ _id: inspectionId });
+
+            if (!inspection) {
+                response.status(404).json({ error: 'Inspection not found' });
+                return;
+            }
+
+            const apiKey = process.env.OPENWEATHER_API_KEY;
+            const location = inspection.hive.location;
+            const weatherEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
+
+            const weatherResponse = await axios.get(weatherEndpoint, {
+                params: {
+                    q: location,
+                    appid: apiKey,
+                },
+            });
+
+            inspection.weather = {
+                temperature: weatherResponse.data.main.temp,
+                description: weatherResponse.data.weather[0].description,
+            };
+
+            await inspection.save();
+
+            response.status(200).json(inspection.weather);
         } catch (error) {
             response.status(500).json({ error: 'Internal Server Error' });
         }
